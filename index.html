@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Afwan | Junior Network Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        :root {
+            --primary: #0F2B48;
+            --secondary: #00A3FF;
+            --accent: #00D084;
+            --light: #F5F8FC;
+            --dark: #1A1A2E;
+            --gray: #64748B;
+        }
+
+        body {
+            background: linear-gradient(to bottom, var(--light), #FFFFFF);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        #hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .hero-content h1 span {
+            color: var(--secondary);
+        }
+
+        .hero-content h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #008FDE;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .network-icon {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+            opacity: 0.2;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 0;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 220px;
+            height: 220px;
+            top: 40px;
+            left: 40px;
+            animation-delay: 0.5s;
+        }
+
+        .circle:nth-child(3) {
+            width: 140px;
+            height: 140px;
+            top: 80px;
+            left: 80px;
+            background: var(--secondary);
+            border: none;
+            opacity: 0.15;
+            animation-delay: 1s;
+        }
+
+        .center-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--secondary);
+            border-radius: 50%;
+            top: 138px;
+            left: 138px;
+            box-shadow: 0 0 20px rgba(0, 163, 255, 0.6);
+        }
+
+        .node {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .node:nth-child(4) { top: 30px; left: 143px; }
+        .node:nth-child(5) { top: 256px; left: 143px; }
+        .node:nth-child(6) { top: 138px; left: 30px; }
+        .node:nth-child(7) { top: 138px; left: 256px; }
+        .node:nth-child(8) { top: 65px; left: 65px; }
+        .node:nth-child(9) { top: 220px; left: 220px; }
+        .node:nth-child(10) { top: 65px; left: 220px; }
+        .node:nth-child(11) { top: 220px; left: 65px; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.05); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 0.2; }
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            color: var(--secondary);
+        }
+
+        #about {
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .info-card strong {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .info-card span {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        #skills {
+            background: var(--light);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-card h4 span {
+            font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .skill-bar {
+            margin-top: 0.8rem;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 8rem;
+            }
+            .hero-content h1 { font-size: 2rem; }
+            .btn-group { justify-content: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigasi -->
+    <header>
+        <nav>
+            <div class="logo">MA.</div>
+            <div class="nav-links">
+                <a href="#hero">Beranda</a>
+                <a href="#about">Tentang</a>
+                <a href="#skills">Keahlian</a>
+                <a href="#contact">Kontak</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Bagian Utama / Hero -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Halo, Saya <span>Muhammad Afwan</span></h1>
+            <h2>Junior Network Engineer</h2>
+            <p>Siswa SMK jurusan Teknik Jaringan Komputer dan Telekomunikasi. Memiliki ketertarikan besar pada dunia jaringan, konektivitas, dan teknologi informasi.</p>
+            <div class="btn-group">
+                <a href="#about" class="btn-primary">Kenali Saya</a>
+                <a href="#contact" class="btn-outline">Hubungi Saya</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="network-icon">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="center-dot"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Tentang Saya -->
+    <section id="about">
+        <h2 class="section-title">Tentang <span>Saya</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Siswa Teknik Jaringan Komputer & Telekomunikasi</h3>
+                <p>Saya adalah siswa kelas X yang sedang mendalami ilmu perancangan, pemasangan, konfigurasi, dan pemeliharaan jaringan komputer. Saya percaya bahwa koneksi yang baik adalah fondasi dunia digital yang handal.</p>
+                <p>Selama belajar, saya berfokus pada praktik langsung seperti pemasangan kabel LAN, konfigurasi perangkat jaringan, serta memahami cara kerja internet dan sistem komunikasi data. Saya siap terus belajar dan berkembang di bidang teknologi jaringan.</p>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <strong>Nama Lengkap</strong>
+                        <span>Muhammad Afwan</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Kelas</strong>
+                        <span>X (Sepuluh)</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Jurusan</strong>
+                        <span>Teknik Jaringan Komputer & Telekomunikasi</span>
+                    </div>
+                    <div class="info-card">
+                        <strong>Status</strong>
+                        <span>Siswa SMK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Keahlian -->
+    <section id="skills">
+        <h2 class="section-title">Keahlian <span>Teknis</span></h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h4>🔌 Pemasangan & Kabel Jaringan</h4>
+                <p>Pemasangan kabel UTP, pembuatan konektor RJ-45, pengetesan kabel, dan instalasi jaringan lokal.</p>
+                <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+            </div>
+            <div class="skill-card">
+                <h4>🖥️ Konfigurasi Jaringan Dasar</h4>
+                <p>Pengaturan IP Address, Subnet Mask, Gateway, DNS, dan konfigurasi dasar perangkat jaringan.</p>
+                <div class="skill-bar"><div class="skill-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="skill-card">
+                <h4>🌐 Sistem Operasi Jaringan</h4>
+                <p>Pemahaman dasar sistem operasi jaringan, pengelolaan pengguna, dan berbagi sumber daya.</p>
+                <div class="skill-bar"><div class="skill-fill" style="width: 65%;"></div></div>
+            </div>
+            <div class="skill-card">
+                <h4>📡 Telekomunikasi Dasar</h4>
+                <p>Pemahaman konsep dasar transmisi data, media transmisi, dan sistem komunikasi jaringan.</p>
+                <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Kontak -->
+    <section id="contact" style="text-align: center; background: white;">
+        <h2 class="section-title">Hubungi <span>Saya</span></h2>
+        <p style="color: var(--gray); max-width: 500px; margin: 0 auto 2rem;">Tertarik untuk bekerja sama atau sekadar ingin berdiskusi tentang jaringan komputer? Jangan ragu untuk menghubungi saya!</p>
+        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
+            <div class="info-card" style="text-align: center; min-width: 200px;">
+                <strong>📧 Email</strong>
+                <span>afwan@email.com</span>
+            </div>
+            <div class="info-card" style="text-align: center; min-width: 200px;">
+                <strong>📍 Lokasi</strong>
+                <span>Jakarta, Indonesia</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Muhammad Afwan — Junior Network Engineer</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Dibangun dengan ❤️ dan semangat belajar</p>
+    </footer>
+</body>
+</html>
